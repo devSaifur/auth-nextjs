@@ -6,18 +6,23 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@radix-ui/react-label'
 import Link from 'next/link'
 import { ReloadIcon } from '@radix-ui/react-icons'
+import { useRouter } from 'next/navigation'
+import { useLogin } from './useLogin'
 
 const Login = () => {
+  const router = useRouter()
   const [user, setUser] = useState({
     email: '',
     password: ''
   })
-  const [isSigningUp, setIsSigningUp] = useState(false)
+  const { login, isLoggingIn } = useLogin()
 
-  const buttonDisable = user.email === '' || user.password.length < 6
+  const buttonDisable =
+    user.email === '' || user.password.length < 6 || isLoggingIn
 
   function handleSubmit() {
-    console.log(user)
+    login(user, { onSuccess: () => router.push('/profile') })
+    setUser({ email: '', password: '' })
   }
 
   return (
@@ -40,7 +45,7 @@ const Login = () => {
         type="password"
       />
       <div className="my-2 flex flex-col gap-4">
-        {!isSigningUp ? (
+        {!isLoggingIn ? (
           <Button onClick={handleSubmit} disabled={buttonDisable}>
             Login
           </Button>
@@ -52,7 +57,11 @@ const Login = () => {
         )}
 
         <Link className="mx-auto" href="/signup">
-          <Button className="text-blue-400" variant="link">
+          <Button
+            disabled={isLoggingIn}
+            className="text-blue-400"
+            variant="link"
+          >
             Visit Sign Up page
           </Button>
         </Link>
