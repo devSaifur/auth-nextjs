@@ -13,8 +13,10 @@ async function connect() {
       console.log('Error connecting to MongoDB', error)
       process.exit(1)
     })
-  } catch (error) {
-    console.error(error)
+  } catch (err) {
+    if (err instanceof Error) {
+      console.error(err.message)
+    }
     process.exit(1)
   }
 }

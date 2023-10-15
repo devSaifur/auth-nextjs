@@ -1,13 +1,13 @@
 'use client'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+
 import { ReloadIcon } from '@radix-ui/react-icons'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@radix-ui/react-label'
-
 import { useSignUp } from './useSignUp'
-import { useRouter } from 'next/navigation'
 
 const SignUp = () => {
   const router = useRouter()

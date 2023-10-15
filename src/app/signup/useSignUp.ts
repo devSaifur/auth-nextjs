@@ -8,7 +8,7 @@ const useSignUp = () => {
   const { mutate: signUp, isLoading: isSigningUp } = useMutation({
     mutationKey: ['signUp'],
     mutationFn: async (user: User) => {
-      const response = await axios.post('/api/users/signup', user)
+      const response = await axios.post('/api/auth/signup', user)
       return response.data
     },
 

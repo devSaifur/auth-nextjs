@@ -1,6 +1,6 @@
+import axios from 'axios'
 import { useToast } from '@/components/ui/use-toast'
 import { useMutation } from '@tanstack/react-query'
-import axios from 'axios'
 
 const useLogin = () => {
   const { toast } = useToast()
@@ -8,7 +8,7 @@ const useLogin = () => {
   const { mutate: login, isLoading: isLoggingIn } = useMutation({
     mutationKey: ['Login'],
     mutationFn: async (user: User) => {
-      const response = await axios.post('/api/users/login', user)
+      const response = await axios.post('/api/auth/login', user)
       return response.data
     },
 
@@ -17,8 +17,10 @@ const useLogin = () => {
         title: 'Logged in successfully.'
       })
     },
-    onError: (error) => {
-      console.error(error)
+    onError: (err) => {
+      if (err instanceof Error) {
+        console.error(err.message)
+      }
 
       toast({
         variant: 'destructive',
