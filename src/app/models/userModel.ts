@@ -24,18 +24,10 @@ const userSchema = new mongoose.Schema({
     enum: ['admin', 'user'],
     default: 'user'
   },
-  forgotPasswordToken: {
-    type: String
-  },
-  forgotPasswordTokenExpiry: {
-    type: Date
-  },
-  verifyToken: {
-    type: String
-  },
-  verifyTokenExpiry: {
-    type: Date
-  }
+  forgotPasswordToken: String,
+  forgotPasswordTokenExpiry: Date,
+  verifyToken: String,
+  verifyTokenExpiry: Date
 })
 
 const User = mongoose.models.users || mongoose.model('users', userSchema)

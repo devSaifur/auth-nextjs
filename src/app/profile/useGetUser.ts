@@ -6,7 +6,7 @@ function useGetUser() {
   const { data: user, isLoading: isGettingUser } = useQuery({
     queryKey: ['User'],
     queryFn: async () => {
-      const res = await axios.get('api/user')
+      const res = await axios.get('/api/user')
       return res.data as User
     },
     onError: (err) => {
