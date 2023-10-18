@@ -21,7 +21,7 @@ const ProfilePage = () => {
 
   return (
     <main className="flex h-screen items-center justify-center">
-      <div className="h-40 flex w-96 flex-col items-center justify-center rounded-md bg-neutral-700">
+      <div className="flex h-40 w-96 flex-col items-center justify-center rounded-md bg-neutral-700">
         <div className="flex gap-10">
           <div className={isGettingUser ? 'space-y-2' : ''}>
             {isGettingUser ? (
@@ -49,7 +49,7 @@ const ProfilePage = () => {
               </Button>
             ) : (
               <Button disabled>
-                <ReloadIcon className="h-4 mr-2 w-4 animate-spin" />
+                <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
                 Logging Out...
               </Button>
             )}

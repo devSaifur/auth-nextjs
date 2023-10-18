@@ -6,7 +6,8 @@ export async function GET() {
       message: 'Logout successful',
       success: true
     })
-    response.cookies.set('token', '', { httpOnly: true, expires: new Date(0) })
+    // deleting existing cookies
+    response.cookies.delete('token')
     return response
   } catch (error) {
     if (error instanceof Error) {

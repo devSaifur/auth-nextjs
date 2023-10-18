@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import User from '@/app/models/userModel'
 import { connect } from '@/app/db/dbConfig'
+import { sendEmail } from '@/app/helpers/mailer'
 
 connect()
 
@@ -22,19 +23,27 @@ export async function POST(request: NextRequest) {
 
     // hash password
     bcrypt.hash(password, 10, function (err, hash) {
+      if (err) return NextResponse.json({ error: err.message }, { status: 500 })
+
       async function createUser() {
-        const user = new User({
+        const newUser = new User({
           username,
           email,
           password: hash
         })
-        const savedUser = await user.save()
 
-        console.log(savedUser)
-        return NextResponse.json(
-          { message: 'User created successfully' },
-          { status: 200 }
-        )
+        const savedUser = await newUser.save()
+
+        await sendEmail({
+          email: email,
+          emailType: 'VERIFY',
+          userId: savedUser._id.toString() // it need to be in string for to be hashed in the database
+        })
+
+        return NextResponse.json({
+          message: 'User created successfully',
+          success: true
+        })
       }
 
       createUser()
