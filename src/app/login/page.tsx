@@ -21,8 +21,12 @@ const Login = () => {
     user.email === '' || user.password.length < 6 || isLoggingIn
 
   function handleSubmit() {
-    login(user, { onSuccess: () => router.push('/profile') })
-    setUser({ email: '', password: '' })
+    login(user, {
+      onSuccess: () => {
+        setUser({ email: '', password: '' })
+        router.push('/profile')
+      }
+    })
   }
 
   return (
@@ -51,7 +55,7 @@ const Login = () => {
           </Button>
         ) : (
           <Button disabled>
-            <ReloadIcon className="h-4 mr-2 w-4 animate-spin" />
+            <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
             Logging in...
           </Button>
         )}

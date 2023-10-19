@@ -6,8 +6,7 @@ function useLogout(redirect: () => void) {
   const { mutate: logout, isLoading: isLoggingOut } = useMutation({
     mutationKey: ['Logout'],
     mutationFn: async () => {
-      const response = await axios.get('/api/auth/logout')
-      return response
+      await axios.get('/api/auth/logout')
     },
     onError: (err) => {
       if (err instanceof Error) {

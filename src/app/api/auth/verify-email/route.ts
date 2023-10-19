@@ -1,6 +1,6 @@
+import { NextRequest, NextResponse } from 'next/server'
 import { connect } from '@/app/db/dbConfig'
 import User from '@/app/models/userModel'
-import { NextRequest, NextResponse } from 'next/server'
 
 connect()
 
@@ -8,7 +8,6 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
     const { token } = body
-    console.log(token)
 
     const user = await User.findOne({
       verifyToken: token,
@@ -22,8 +21,7 @@ export async function POST(request: NextRequest) {
     user.isVerified = true
     user.verifyToken = undefined
     user.verifyTokenExpiry = undefined
-    const savedUser = await user.save()
-    console.log(savedUser)
+    await user.save()
 
     return NextResponse.json({
       message: 'User verified successfully',

@@ -26,7 +26,11 @@ function VerifyEmailPage() {
     setToken(urlToken || '')
   }, [])
 
-  return <div>hello</div>
+  return (
+    <div className="flex h-screen items-center justify-center">
+      Please wait, You&#39ll be redirected to login page shortly
+    </div>
+  )
 }
 
 export default VerifyEmailPage

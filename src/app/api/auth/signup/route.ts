@@ -1,5 +1,5 @@
-import bcrypt from 'bcrypt'
 import { NextRequest, NextResponse } from 'next/server'
+import bcrypt from 'bcrypt'
 
 import User from '@/app/models/userModel'
 import { connect } from '@/app/db/dbConfig'

@@ -1,8 +1,9 @@
+import { NextRequest, NextResponse } from 'next/server'
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+
 import { connect } from '@/app/db/dbConfig'
 import User from '@/app/models/userModel'
-import { NextRequest, NextResponse } from 'next/server'
-import jwt from 'jsonwebtoken'
 
 connect()
 
